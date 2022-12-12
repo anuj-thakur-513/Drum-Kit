@@ -32,6 +32,18 @@ function handleEvent(keyPressed) {
     audio.play();
 }
 
+// function for the button animation
+function buttonAnimation(keyPressed) {
+    // storing the current button using button's class
+    var activeButton = document.querySelector("." + keyPressed);
+    activeButton.classList.add("pressed");
+
+    // removing the added class after a time delay
+    setTimeout(function () {
+        activeButton.classList.remove("pressed")
+    }, 100);
+}
+
 
 // setting onClick event listener for every element of button attribute
 var numberOfDrumButtons = document.querySelectorAll(".drum").length;
@@ -42,6 +54,7 @@ for (var i = 0; i < numberOfDrumButtons; i++) {
         // getting the inner HTML of the button pressed 
         var buttonInnerHTML = this.innerHTML;
         handleEvent(buttonInnerHTML);
+        buttonAnimation(buttonInnerHTML);
     });
 }
 
@@ -51,4 +64,5 @@ for (var i = 0; i < numberOfDrumButtons; i++) {
 // use the 'event' that triggers the function
 document.addEventListener("keydown", function (event) {
     handleEvent(event.key);
+    buttonAnimation(event.key);
 });
